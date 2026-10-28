@@ -1,0 +1,80 @@
+======================================================================
+OPTIMIZED RETAIL INVENTORY MANAGEMENT SYSTEM - DATASET VALIDATION REPORT
+======================================================================
+Generated on: 2026-10-28
+Target file: data/dataset.csv
+
+1. SOURCES INSPECTED AND COMBINED:
+   - Primary additional file: data/dataset_additional_4500.csv (4500 rows, 10 cols)
+   - Original LMS file: /Users/sahulkumar/Desktop/SATH2.O/dataset.csv (500 rows, 10 cols)
+   - Alternate candidate inspected: /Users/sahulkumar/Desktop/HCL/dataset_original_500_reconstructed.csv (500 rows, 10 cols)
+   Decision: Used authentic original university LMS dataset (SATH2.O/dataset.csv)
+   which matches the SKU0487 sample in data_dictionary.csv, combined with the 4,500 record file.
+
+2. COMBINED DATASET DIMENSIONS & SCHEMA:
+   - Total records: 5000
+   - Total columns: 10
+   - Columns & order: date, product_id, category, season, stock_qty, reorder_level, daily_sales, unit_cost, supplier_id, lead_days
+   - Schema matches expected exact order: True
+
+3. DATA INTEGRITY & QUALITY CHECKS:
+   - Exact duplicate rows: 0
+   - Unique product IDs (SKUs): 500
+   - Unique categories (4): ['HomeDecor', 'Apparel', 'Electronics', 'Grocery']
+   - Unique suppliers (30): ['SUP01', 'SUP02', 'SUP03', 'SUP04', 'SUP05', 'SUP06', 'SUP07', 'SUP08', 'SUP09', 'SUP10', 'SUP11', 'SUP12', 'SUP13', 'SUP14', 'SUP15', 'SUP16', 'SUP17', 'SUP18', 'SUP19', 'SUP20', 'SUP21', 'SUP22', 'SUP23', 'SUP24', 'SUP25', 'SUP26', 'SUP27', 'SUP28', 'SUP29', 'SUP30']
+   - Date range: 2024-01-01 to 2024-12-31
+   - Missing values per column:
+       date: 0 nulls
+       product_id: 0 nulls
+       category: 0 nulls
+       season: 0 nulls
+       stock_qty: 0 nulls
+       reorder_level: 0 nulls
+       daily_sales: 0 nulls
+       unit_cost: 0 nulls
+       supplier_id: 0 nulls
+       lead_days: 0 nulls
+
+4. NUMERIC FIELD VALIDATION:
+   - stock_qty     : min=0        max=500        mean=247.14     std=146.53    
+   - reorder_level : min=20       max=100        mean=60.38      std=23.28     
+   - daily_sales   : min=1        max=147        mean=30.06      std=14.34     
+   - unit_cost     : min=100.03   max=11807.93   mean=1458.61    std=1544.67   
+   - lead_days     : min=3        max=21         mean=11.96      std=5.50      
+   - All stock_qty, reorder_level, daily_sales, lead_days are non-negative integers.
+   - All unit_cost values are positive floats.
+
+5. DATE AND SEASON CONSISTENCY:
+season  Festive  Monsoon  Summer  Winter
+month                                   
+1             0        0       0     853
+2             0        0       0     365
+3             0        0     367       0
+4             0        0     333       0
+5             0        0     400       0
+6             0        0     355       0
+7             0      391       0       0
+8             0      411       0       0
+9             0      371       0       0
+10          383        0       0       0
+11          378        0       0       0
+12            0        0       0     393
+   - Observation: 100% consistent season-to-month assignment.
+     Winter: Months 1, 2, 12 | Summer: Months 3, 4, 5, 6 | Monsoon: Months 7, 8, 9 | Festive: Months 10, 11
+
+6. SEASONAL DEMAND ANALYSIS (EMPIRICAL FINDINGS):
+         count       mean        std  min  median  max
+season                                                
+Festive    761  37.583443  14.646310    8    36.0  138
+Monsoon   1173  26.709292  13.156834    1    26.0  146
+Summer    1455  30.839175  13.989246    1    29.0  147
+Winter    1611  28.253259  13.976481    1    27.0  146
+
+   Empirical Observations:
+   - Festive season experiences highest average daily sales (37.58 units/day, ~40.7% above Monsoon).
+   - Summer exhibits the second highest demand (30.84 units/day, ~15.5% above Monsoon).
+   - Monsoon records the lowest average sales (26.71 units/day).
+   - Winter records moderate sales (28.25 units/day).
+   - Peak individual daily sales surges occurred in Summer (147 units) and Monsoon (146 units).
+
+======================================================================

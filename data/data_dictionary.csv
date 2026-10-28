@@ -1,0 +1,11 @@
+column_name,data_type,description_fill_in
+date,datetime,Date on which the inventory and sales record was recorded.
+product_id,string,"Product identifier, such as SKU0487."
+category,string,"Product category, such as Grocery, Electronics, Apparel, or HomeDecor."
+season,string,"Season associated with the record, such as Winter, Summer, Monsoon, or Festive."
+stock_qty,integer,Number of units currently available in inventory.
+reorder_level,integer,Stock threshold at which replenishment should be considered.
+daily_sales,integer,Number of units sold during the recorded day.
+unit_cost,float,"Cost of purchasing one unit, in the dataset's unspecified currency."
+supplier_id,string,Identifier of the supplier providing the product.
+lead_days,integer,Supplier delivery lead time in days.

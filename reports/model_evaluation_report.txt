@@ -1,0 +1,42 @@
+======================================================================
+DEMAND FORECASTING MODEL EVALUATION REPORT
+======================================================================
+Evaluation Date: 2026-10-28 01:09:25
+Split Strategy: 3-Way Chronological (Train / Validation / Test)
+Training Period    : 2024-01-01 to 2024-09-12 (3627 samples)
+Validation Period  : 2024-09-13 to 2024-11-06 (676 samples) [Model Selection]
+Holdout Test Period: 2024-11-07 to 2024-12-31 (697 samples) [Final Evaluation]
+
+1. MODEL SELECTION ON VALIDATION SET (Pre-Test Decision):
+----------------------------------------------------------------------
+Model Name                 | MAE      | RMSE     | R2       | WAPE (%)
+----------------------------------------------------------------------
+Dummy Mean Baseline        | 10.706   | 15.986   | -0.1346  | 31.13   
+Rolling-7 Baseline         | 11.090   | 16.295   | -0.1790  | 32.24   
+HistGradientBoosting       | 10.186   | 15.400   | -0.0530  | 29.61   
+RandomForest               | 9.987    | 15.109   | -0.0135  | 29.04   
+----------------------------------------------------------------------
+Selected Best Model on Validation: RandomForest (Lowest Validation RMSE: 15.109)
+
+2. UNBIASED PERFORMANCE ON UNSEEN HOLDOUT TEST SET:
+----------------------------------------------------------------------
+Model Name                 | MAE      | RMSE     | R2       | WAPE (%)
+----------------------------------------------------------------------
+Dummy Mean Baseline        | 10.194   | 16.052   | -0.0382  | 31.89   
+Rolling-7 Baseline         | 11.266   | 16.536   | -0.1017  | 35.24   
+HistGradientBoosting       | 9.429    | 15.917   | -0.0208  | 29.49   
+RandomForest               | 9.195    | 15.553   | 0.0254   | 28.76   
+----------------------------------------------------------------------
+PRODUCTION MODEL CONFIRMATION: RandomForest
+Holdout Test MAE : 9.195 units/day
+Holdout Test RMSE: 15.553 units/day
+Holdout Test R²  : 0.0254
+
+EMPIRICAL EXPLANATION OF R² AND ACCURACY BOUNDS:
+1. Real-world retail sales data with 500 SKUs exhibit high daily Poisson-like demand volatility
+   and intermittent purchase events.
+2. The Random Forest model reduces MAE by ~1.0 unit/day and RMSE by ~0.5 unit/day compared to naive mean baselines.
+3. Due to large unexplained daily sales variance (standard deviation ~14 units), R² is naturally modest (~0.03 to 0.09).
+4. Prediction interval note: Intervals constructed using ±1.96 × RMSE are approximate error-based heuristic intervals
+   under an assumed normal residual distribution, not statistically calibrated 95% conformal prediction intervals.
+======================================================================
